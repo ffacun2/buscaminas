@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -210,7 +211,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 				this.panelCentral.add(this.casilleros[i][j]);
 				this.casilleros[i][j].addMouseListener(this);
 		    }
-		this.setBounds(100, 100, this.panelOeste.getWidth() + 52 * ancho, 52 * alto + 25);
+		this.setBounds(100, 100, this.panelOeste.getWidth() + 35 * ancho, 35 * alto + 25);
 		this.setLocationRelativeTo(null);
     }
 
@@ -219,6 +220,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		    for (int j = 0; j < tablero.getAncho(); j++) {
 				if (tablero.isPisado(i, j)) {
 				    this.casilleros[i][j].setBorder(new BevelBorder(BevelBorder.LOWERED));
+				    this.casilleros[i][j].setBackground(Color.lightGray);
 				    if (tablero.isMina(i, j)) {
 				    	this.casilleros[i][j].setImageIcon(recursos.getExplosion());
 				    } 
