@@ -307,5 +307,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     @Override
     public void mouseReleased(MouseEvent arg0){
     }
-
+    
+    @Override
+    public boolean isActiveBtn() {
+    	return this.btnIniciar.isEnabled();
+    }
 }

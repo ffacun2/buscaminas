@@ -22,4 +22,6 @@ public interface IVista{
     void perder();
 
     void ganar();
+    
+    boolean isActiveBtn();
 }

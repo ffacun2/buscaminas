@@ -25,9 +25,11 @@ public class Controlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		if (comando.equalsIgnoreCase("INICIAR")) {
-			this.tablero = new Tablero(this.vista.getAlto(), this.vista.getAncho(), this.vista.getCantidad());
-			this.vista.iniciarJuego(this.vista.getAlto(), this.vista.getAncho());
-
+			if(this.vista.isActiveBtn()) {
+				this.tablero = new Tablero(this.vista.getAlto(), this.vista.getAncho(), this.vista.getCantidad());
+				this.vista.iniciarJuego(this.vista.getAlto(), this.vista.getAncho());
+				this.vista.dibujar(tablero);
+			}
 		} else if (comando.equalsIgnoreCase("PISAR")) {
 			ICelda celda = (ICelda) e.getSource();
 			int i = celda.getI();
@@ -44,14 +46,15 @@ public class Controlador implements ActionListener {
 					this.vista.ganar();
 				}
 			}
+			this.vista.dibujar(tablero);
 		} else if (comando.equalsIgnoreCase("MARCAR")){
 			ICelda celda = (ICelda) e.getSource();
 			int i = celda.getI();
 			int j = celda.getJ();
 			if (!this.tablero.isPisado(i, j))
 				this.tablero.marca(i, j);
+			this.vista.dibujar(tablero);
 		}
-		this.vista.dibujar(tablero);
 	}
 	
 }
