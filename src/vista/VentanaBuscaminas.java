@@ -27,31 +27,31 @@ import java.awt.Font;
 public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, MouseListener {
 
 	private static Recursos recursos = new Recursos();
+	private PanelConCelda[][] casilleros;
     private JPanel contentPane;
     private JPanel panelOeste;
     private JPanel panelCentral;
-    private ActionListener actionListener;
-    private PanelConCelda[][] casilleros;
-    private JPanel panel_10;
     private JPanel panel;
     private JPanel panel_1;
-    private JLabel lbl_Alto;
-    private JPanel panel_8;
-    private JTextField textField_Ancho;
     private JPanel panel_2;
     private JPanel panel_3;
-    private JLabel lbl_Ancho;
-    private JPanel panel_6;
-    private JTextField textField_Alto;
     private JPanel panel_4;
     private JPanel panel_5;
-    private JLabel lbl_Cantidad;
-    private JPanel panel_9;
-    private JTextField textField_Cantidad;
+    private JPanel panel_6;
     private JPanel panel_7;
-    private JButton btnIniciar;
+    private JPanel panel_8;
+    private JPanel panel_9;
+    private JPanel panel_10;
     private JPanel panel_11;
     private JLabel lbl_title;
+    private JLabel lbl_Alto;
+    private JLabel lbl_Ancho;
+    private JLabel lbl_Cantidad;
+    private JTextField textField_Ancho;
+    private JTextField textField_Alto;
+    private JTextField textField_Cantidad;
+    private JButton btnIniciar;
+    private ActionListener actionListener;
 
   
     public VentanaBuscaminas() {
@@ -93,8 +93,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		this.panel.add(panel_8);
 		
 		this.textField_Ancho = new JTextField();
-		this.textField_Ancho.setColumns(10);
 		this.textField_Ancho.addKeyListener(this);
+		this.textField_Ancho.setActionCommand("INICIAR");
+		this.textField_Ancho.setColumns(10);
 		this.panel_8.add(textField_Ancho);
 		
 		this.panel_2 = new JPanel();
@@ -111,8 +112,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		this.panel_2.add(panel_6);
 		
 		this.textField_Alto = new JTextField();
-		this.textField_Alto.setColumns(10);
 		this.textField_Alto.addKeyListener(this);
+		this.textField_Alto.setActionCommand("INICIAR");
+		this.textField_Alto.setColumns(10);
 		this.panel_6.add(textField_Alto);
 		
 		this.panel_4 = new JPanel();
@@ -130,6 +132,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		
 		this.textField_Cantidad = new JTextField();
 		this.textField_Cantidad.addKeyListener(this);
+		this.textField_Cantidad.setActionCommand("INICIAR");
 		this.textField_Cantidad.setColumns(10);
 		this.panel_9.add(textField_Cantidad);
 		
@@ -150,6 +153,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 
     @Override
     public void setActionListener(ActionListener actionListener) {
+    	this.textField_Alto.addActionListener(actionListener);
+    	this.textField_Ancho.addActionListener(actionListener);
+    	this.textField_Cantidad.addActionListener(actionListener);
     	this.btnIniciar.addActionListener(actionListener);
     	this.actionListener = actionListener;
     }
@@ -191,7 +197,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     	return Integer.parseInt(this.textField_Cantidad.getText());
     }
 
-
+    /**
+     * Desabilita la configuracion y crea el crea el panel con las celdas
+     */
     @Override
     public void iniciarJuego(int alto, int ancho) {
     	this.panelCentral.setVisible(true);
@@ -214,7 +222,10 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		this.setBounds(100, 100, this.panelOeste.getWidth() + 35 * ancho, 35 * alto + 25);
 		this.setLocationRelativeTo(null);
     }
-
+    
+    /**
+     * Metodo que dibuja el tablero por cada accion/evento que ocurre (pisar/marcar)
+     */
     public void dibujar(IBuscaminas tablero) {
 		for (int i = 0; i < tablero.getAlto(); i++)
 		    for (int j = 0; j < tablero.getAncho(); j++) {
@@ -239,6 +250,9 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		this.repaint();
     }
 
+    /**
+     * Metodo que dibuja el tablero final, ya sea por ganar o perder, mostrando las el total de las minas existentes
+     */
     public void dibujarFinal(IBuscaminas tablero) {
 		for (int i = 0; i < tablero.getAlto(); i++)
 		    for (int j = 0; j < tablero.getAncho(); j++) {
@@ -251,6 +265,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		    }
 		this.repaint();
     }
+    
 
     @Override
     public void perder(){
