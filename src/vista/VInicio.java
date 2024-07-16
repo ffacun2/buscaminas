@@ -43,6 +43,7 @@ public class VInicio extends JFrame {
 	private ActionListener actionListener;
 
 	public VInicio() {
+		super("Configuracion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 333, 300);
 		this.contentPane = new JPanel();

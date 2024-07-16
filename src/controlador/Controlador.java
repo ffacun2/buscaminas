@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import modelo.ICelda;
 import modelo.Tablero;
 import vista.IVista;
-import vista.VInicio;
 
 public class Controlador implements ActionListener {
 	

@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import modelo.IBuscaminas;
 import modelo.ICelda;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, MouseListener {
@@ -28,9 +29,8 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     private JPanel contentPane;
     private JPanel panelOeste;
     private JPanel panelCentral;
-    private JPanel panel_7;
     private JPanel panel_10;
-    private JButton btnIniciar;
+    private JButton restartButton;
     private ActionListener actionListener;
 
   
@@ -45,23 +45,20 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		setLocationRelativeTo(null);
 	
 		this.panelOeste = new JPanel();
-		this.contentPane.add(this.panelOeste, BorderLayout.WEST);
-		this.panelOeste.setLayout(new GridLayout(1, 2, 0, 0));
+		this.contentPane.add(this.panelOeste, BorderLayout.NORTH);
+		panelOeste.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		this.panel_10 = new JPanel();
-		this.panelOeste.add(panel_10);
-		this.panel_10.setLayout(new GridLayout(5, 1, 0, 0));
-		
-		this.panel_7 = new JPanel();
-		this.panel_10.add(panel_7);
-		
-		this.btnIniciar = new JButton("Iniciar");
-		this.btnIniciar.setEnabled(false);
-		this.btnIniciar.setActionCommand("INICIAR");
-		this.panel_7.add(btnIniciar);
+		this.restartButton = new JButton("Reiniciar");
+		panelOeste.add(restartButton);
+		this.restartButton.setEnabled(false);
+		this.restartButton.setActionCommand("INICIAR");
 	
 		this.panelCentral = new JPanel();
 		this.contentPane.add(this.panelCentral, BorderLayout.CENTER);
+		
+		this.panel_10 = new JPanel();
+		contentPane.add(panel_10, BorderLayout.SOUTH);
+		panel_10.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		this.panelCentral.setVisible(false);
 		this.setVisible(true);
 		
@@ -69,7 +66,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 
     @Override
     public void setActionListener(ActionListener actionListener) {
-    	this.btnIniciar.addActionListener(actionListener);
+    	this.restartButton.addActionListener(actionListener);
     	this.actionListener = actionListener;
     }
 
@@ -78,18 +75,6 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     }
 
     public void keyReleased(KeyEvent arg0) {
-		int ancho = 0;
-		int alto = 0;
-		int cantidad = 0;
-		try {
-		    ancho = getAncho();
-		    alto = getAlto();
-		    cantidad = getCantidad();
-		} catch (NumberFormatException e){
-		}
-
-		boolean condicion = ancho > 0 && alto > 0 && cantidad > 0 && cantidad < ancho*alto;
-		this.btnIniciar.setEnabled(condicion);
     }
 
     public void keyTyped(KeyEvent arg0){
@@ -115,7 +100,7 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     @Override
     public void iniciarJuego(int alto, int ancho) {
     	this.panelCentral.setVisible(true);
-		this.btnIniciar.setEnabled(false);
+		this.restartButton.setEnabled(false);
 		this.panelCentral.setLayout(new GridLayout(0, ancho));
 		this.casilleros = new PanelConCelda[alto][ancho];
 		for (int i = 0; i < alto; i++)
@@ -216,6 +201,6 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     
     @Override
     public boolean isActiveBtn() {
-    	return this.btnIniciar.isEnabled();
+    	return this.restartButton.isEnabled();
     }
 }
