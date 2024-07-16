@@ -12,16 +12,13 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import modelo.IBuscaminas;
 import modelo.ICelda;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, MouseListener {
@@ -31,25 +28,8 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     private JPanel contentPane;
     private JPanel panelOeste;
     private JPanel panelCentral;
-    private JPanel panel;
-    private JPanel panel_1;
-    private JPanel panel_2;
-    private JPanel panel_3;
-    private JPanel panel_4;
-    private JPanel panel_5;
-    private JPanel panel_6;
     private JPanel panel_7;
-    private JPanel panel_8;
-    private JPanel panel_9;
     private JPanel panel_10;
-    private JPanel panel_11;
-    private JLabel lbl_title;
-    private JLabel lbl_Alto;
-    private JLabel lbl_Ancho;
-    private JLabel lbl_Cantidad;
-    private JTextField textField_Ancho;
-    private JTextField textField_Alto;
-    private JTextField textField_Cantidad;
     private JButton btnIniciar;
     private ActionListener actionListener;
 
@@ -72,70 +52,6 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 		this.panelOeste.add(panel_10);
 		this.panel_10.setLayout(new GridLayout(5, 1, 0, 0));
 		
-		this.panel_11 = new JPanel();
-		this.panel_10.add(panel_11);
-		
-		this.lbl_title = new JLabel("Configuracion");
-		this.lbl_title.setFont(new Font("Tahoma", Font.BOLD, 14));
-		this.panel_11.add(lbl_title);
-		
-		this.panel = new JPanel();
-		this.panel_10.add(panel);
-		this.panel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		this.panel_1 = new JPanel();
-		this.panel.add(panel_1);
-		
-		this.lbl_Alto = new JLabel("Alto:");
-		this.panel_1.add(lbl_Alto);
-		
-		this.panel_8 = new JPanel();
-		this.panel.add(panel_8);
-		
-		this.textField_Ancho = new JTextField();
-		this.textField_Ancho.addKeyListener(this);
-		this.textField_Ancho.setActionCommand("INICIAR");
-		this.textField_Ancho.setColumns(10);
-		this.panel_8.add(textField_Ancho);
-		
-		this.panel_2 = new JPanel();
-		this.panel_10.add(panel_2);
-		this.panel_2.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		this.panel_3 = new JPanel();
-		this.panel_2.add(panel_3);
-		
-		this.lbl_Ancho = new JLabel("Ancho:");
-		this.panel_3.add(lbl_Ancho);
-		
-		this.panel_6 = new JPanel();
-		this.panel_2.add(panel_6);
-		
-		this.textField_Alto = new JTextField();
-		this.textField_Alto.addKeyListener(this);
-		this.textField_Alto.setActionCommand("INICIAR");
-		this.textField_Alto.setColumns(10);
-		this.panel_6.add(textField_Alto);
-		
-		this.panel_4 = new JPanel();
-		this.panel_10.add(panel_4);
-		this.panel_4.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		this.panel_5 = new JPanel();
-		this.panel_4.add(panel_5);
-		
-		this.lbl_Cantidad = new JLabel("Cantidad de Minas:");
-		this.panel_5.add(lbl_Cantidad);
-		
-		this.panel_9 = new JPanel();
-		this.panel_4.add(panel_9);
-		
-		this.textField_Cantidad = new JTextField();
-		this.textField_Cantidad.addKeyListener(this);
-		this.textField_Cantidad.setActionCommand("INICIAR");
-		this.textField_Cantidad.setColumns(10);
-		this.panel_9.add(textField_Cantidad);
-		
 		this.panel_7 = new JPanel();
 		this.panel_10.add(panel_7);
 		
@@ -153,9 +69,6 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
 
     @Override
     public void setActionListener(ActionListener actionListener) {
-    	this.textField_Alto.addActionListener(actionListener);
-    	this.textField_Ancho.addActionListener(actionListener);
-    	this.textField_Cantidad.addActionListener(actionListener);
     	this.btnIniciar.addActionListener(actionListener);
     	this.actionListener = actionListener;
     }
@@ -182,19 +95,18 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     public void keyTyped(KeyEvent arg0){
     }
 
-    @Override
     public int getAncho(){
-    	return Integer.parseInt(this.textField_Ancho.getText());
+    	return 0;
     }
 
     @Override
     public int getAlto(){
-    	return Integer.parseInt(this.textField_Alto.getText());
+    	return 0;
     }
 
     @Override
     public int getCantidad() {
-    	return Integer.parseInt(this.textField_Cantidad.getText());
+    	return 0;
     }
 
     /**
@@ -203,12 +115,6 @@ public class VentanaBuscaminas extends JFrame implements KeyListener, IVista, Mo
     @Override
     public void iniciarJuego(int alto, int ancho) {
     	this.panelCentral.setVisible(true);
-		this.textField_Alto.setEnabled(false);
-		this.textField_Ancho.setEnabled(false);
-		this.textField_Cantidad.setEnabled(false);
-		this.lbl_Alto.setEnabled(false);
-		this.lbl_Ancho.setEnabled(false);
-		this.lbl_Cantidad.setEnabled(false);
 		this.btnIniciar.setEnabled(false);
 		this.panelCentral.setLayout(new GridLayout(0, ancho));
 		this.casilleros = new PanelConCelda[alto][ancho];

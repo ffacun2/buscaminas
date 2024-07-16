@@ -1,13 +1,14 @@
 package main;
 
-import controlador.Controlador;
-import vista.VentanaBuscaminas;
+import controlador.ControladorInicio;
+import vista.VInicio;
 
 public class Main{
 
     public static void main(String[] args){
-    	Controlador controlador=new Controlador();
-    	controlador.setVista(new VentanaBuscaminas());
+
+    	ControladorInicio control = new ControladorInicio();
+    	control.setVista(new VInicio());
     }
 
 }

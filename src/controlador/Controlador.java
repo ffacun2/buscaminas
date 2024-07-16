@@ -6,12 +6,24 @@ import java.awt.event.ActionListener;
 import modelo.ICelda;
 import modelo.Tablero;
 import vista.IVista;
+import vista.VInicio;
 
 public class Controlador implements ActionListener {
 	
 	private Tablero tablero;
 	private IVista vista;
+	private int alto;
+	private int ancho;
+	private int cantidadMinas;
 
+	public Controlador(IVista vista,int alto,int ancho,int minas) {
+		this.alto = alto;
+		this.ancho = ancho;
+		this.cantidadMinas = minas;
+		this.vista = vista;
+		this.vista.setActionListener(this);
+	}
+	
 	public IVista getVista() {
 		return vista;
 	}
@@ -20,14 +32,14 @@ public class Controlador implements ActionListener {
 		this.vista = vista;
 		this.vista.setActionListener(this);
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		if (comando.equalsIgnoreCase("INICIAR")) {
 			if(this.vista.isActiveBtn()) {
-				this.tablero = new Tablero(this.vista.getAlto(), this.vista.getAncho(), this.vista.getCantidad());
-				this.vista.iniciarJuego(this.vista.getAlto(), this.vista.getAncho());
+				this.tablero = new Tablero(this.alto, this.ancho, this.cantidadMinas);
+				this.vista.iniciarJuego(this.alto, this.ancho);
 				this.vista.dibujar(tablero);
 			}
 		} else if (comando.equalsIgnoreCase("PISAR")) {
@@ -55,6 +67,13 @@ public class Controlador implements ActionListener {
 				this.tablero.marca(i, j);
 			this.vista.dibujar(tablero);
 		}
+	
+	}
+	
+	public void iniciar() {
+		this.tablero = new Tablero(this.alto, this.ancho, this.cantidadMinas);
+		this.vista.iniciarJuego(this.alto, this.ancho);
+		this.vista.dibujar(tablero);
 	}
 	
 }
