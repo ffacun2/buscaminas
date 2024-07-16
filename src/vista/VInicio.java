@@ -40,6 +40,7 @@ public class VInicio extends JFrame {
 	private JTextField minasField;
 	private JButton atrasButton;
 	private JButton aceptButton;
+	@SuppressWarnings("unused")
 	private ActionListener actionListener;
 
 	public VInicio() {
